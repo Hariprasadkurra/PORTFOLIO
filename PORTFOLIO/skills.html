@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skills & Contact</title>
+  <link rel="icon" href="LOGO1.png" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --primary-color: #00ffff;
+      --secondary-color: #0099cc;
+      --accent-color: #ff6b6b;
+      --success-color: #4ecdc4;
+      --warning-color: #ffe66d;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --dark-glass: rgba(0, 0, 0, 0.4);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.8);
+      --text-muted: rgba(255, 255, 255, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Complex Animated Background - KEPT AS IS */
+    .background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .background-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%),
+                  linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #1a1a2e 100%);
+      animation: gradientShift 15s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    .floating-particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+    }
+
+    .particle:nth-child(odd) {
+      background: rgba(255, 107, 107, 0.1);
+      animation-duration: 25s;
+    }
+
+    .particle:nth-child(3n) {
+      background: rgba(78, 205, 196, 0.1);
+      animation-duration: 30s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .grid-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    /* ENHANCED BIGGER NAVIGATION */
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10, 20, 40, 0.85);
+      backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      border-radius: 30px;
+      padding: 12px 30px;
+      z-index: 1000;
+      display: flex;
+      gap: 25px;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(70, 120, 180, 0.1);
+      min-width: 500px;
+      opacity: 0;
+      animation: slideDown 1s ease-out 0.5s forwards;
+    }
+
+    @keyframes slideDown { 
+      to { 
+        opacity: 1; 
+      } 
+    }
+
+    nav a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover, nav a.active {
+      background: var(--glass-bg);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 
+        0 4px 15px rgba(0, 255, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    /* CONTAINER WITH MORE SPACE */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 120px 15px 40px;
+    }
+
+    /* ENHANCED PAGE HEADER */
+    .page-header {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary-color), var(--accent-color), transparent);
+      animation: headerGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes headerGlow {
+      from { box-shadow: 0 0 10px var(--primary-color); }
+      to { box-shadow: 0 0 20px var(--accent-color), 0 0 30px var(--accent-color); }
+    }
+
+    .page-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff 0%, var(--primary-color) 50%, var(--accent-color) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .page-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto 25px;
+      line-height: 1.6;
+    }
+
+    .header-decoration {
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      margin: 0 auto;
+      border-radius: 2px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px var(--primary-color); }
+      to { box-shadow: 0 0 20px var(--accent-color), 0 0 30px var(--accent-color); }
+    }
+
+    /* STATS SECTION AT TOP */
+    .stats-section {
+      margin-bottom: 40px;
+    }
+
+    .stats-title {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-item {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-color);
+      box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+    }
+
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* IMPROVED MAIN LAYOUT */
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    /* SKILLS SECTION - FULL WIDTH */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .skill-category {
+      background: var(--glass-bg);
+      backdrop-filter: blur(30px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 25px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-category::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--success-color));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .skill-category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 255, 255, 0.1);
+      border-color: rgba(0, 255, 255, 0.3);
+    }
+
+    .skill-category:hover::before {
+      opacity: 1;
+    }
+
+    .category-title {
+      font-size: 1.3rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .category-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: #000;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    /* SKILL ITEMS */
+    .skill-item {
+      background: var(--dark-glass);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+      transition: left 0.6s;
+    }
+
+    .skill-item:hover::before {
+      left: 100%;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-3px);
+      background: rgba(0, 255, 255, 0.1);
+      border-color: var(--primary-color);
+    }
+
+    .skill-name {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .skill-progress {
+      background: rgba(0, 0, 0, 0.5);
+      height: 6px;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 6px;
+      position: relative;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      border-radius: 3px;
+      transition: width 1.5s ease;
+      width: 0%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .skill-percentage {
+      font-size: 0.8rem;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    /* CONTACT & ACHIEVEMENTS SECTION */
+    .bottom-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .contact-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 255, 255, 0.15);
+    }
+
+    .contact-title {
+      font-size: 1.3rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .contact-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    .contact-icon {
+      width: 35px;
+      height: 35px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #000;
+    }
+
+    .contact-info {
+      flex: 1;
+      text-align: left;
+    }
+
+    .contact-label {
+      font-size: 0.8rem;
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .contact-value {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* ACHIEVEMENTS MINI SECTION */
+    .achievements-mini {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 25px;
+    }
+
+    .achievements-mini h3 {
+      font-size: 1.3rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .achievement-item {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      padding: 15px;
+      border-left: 4px solid var(--primary-color);
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .achievement-item:hover {
+      transform: translateX(5px);
+      background: rgba(0, 255, 255, 0.05);
+    }
+
+    .achievement-name {
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .achievement-org {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* FULL WIDTH ACHIEVEMENTS SECTION */
+    .achievements-section {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .achievement-card {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      padding: 20px;
+      border-left: 4px solid var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-3px);
+      background: rgba(0, 255, 255, 0.05);
+    }
+
+    .achievement-title {
+      font-size: 1rem;
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .achievement-org {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 10px;
+    }
+
+    .achievement-desc {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.5;
+    }
+
+    /* ENHANCED FOOTER */
+    .footer {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 40px;
+      color: #fff;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-content h2 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: cyan;
+    }
+
+    .footer-socials {
+      margin: 15px 0;
+    }
+
+    .footer-socials a {
+      color: cyan;
+      font-size: 1.3rem;
+      margin: 0 10px;
+      transition: 0.3s ease;
+      padding: 8px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+    }
+
+    .footer-socials a:hover {
+      color: #fff;
+      transform: scale(1.2) translateY(-2px);
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .footer-copy {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .skills-container {
+        grid-template-columns: 1fr;
+      }
+
+      .bottom-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .quick-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 8px 20px;
+        gap: 15px;
+        min-width: auto;
+        width: 90%;
+      }
+
+      nav a {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+      }
+
+      .container {
+        padding: 100px 10px 25px;
+      }
+
+      .skills-container {
+        grid-template-columns: 1fr;
+      }
+
+      .achievements-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Loading Animation */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0a0a0a;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 3px solid rgba(0, 255, 255, 0.3);
+      border-top: 3px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Complex Background - KEPT AS IS -->
+  <div class="background-container">
+    <div class="background-gradient"></div>
+    <div class="grid-overlay"></div>
+    <div class="floating-particles" id="particles"></div>
+  </div>
+
+  <!-- Enhanced Navigation -->
+  <nav>
+    <a href="index.html">Intro</a>
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="internships.html">Experience</a>
+    <a href="skills.html" class="active">Skills & Contact</a>
+  </nav>
+
+  <div class="container">
+    <!-- Enhanced Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">Skills & Contact</h1>
+      <p class="page-subtitle">Technical expertise and ways to connect</p>
+      <div class="header-decoration"></div>
+    </div>
+
+    <!-- STATS SECTION AT TOP -->
+    <div class="stats-section">
+      <h3 class="stats-title">🚀 Quick Stats</h3>
+      <div class="quick-stats">
+        <div class="stat-item">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2</div>
+          <div class="stat-label">Internships</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Certifications</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- SKILLS SECTION - FULL WIDTH -->
+      <div class="skills-container">
+        <div class="skill-category">
+          <h3 class="category-title">
+            <div class="category-icon">🐍</div>
+            Programming Languages
+          </h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <div class="skill-name">Python</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="95"></div>
+              </div>
+              <div class="skill-percentage">95%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">JavaScript</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="85"></div>
+              </div>
+              <div class="skill-percentage">85%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">Java</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="80"></div>
+              </div>
+              <div class="skill-percentage">80%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">C</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="75"></div>
+              </div>
+              <div class="skill-percentage">75%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="category-title">
+            <div class="category-icon">🤖</div>
+            AI/ML & Data Science
+          </h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <div class="skill-name">TensorFlow</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="90"></div>
+              </div>
+              <div class="skill-percentage">90%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">Scikit-learn</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="92"></div>
+              </div>
+              <div class="skill-percentage">92%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">OpenCV</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="88"></div>
+              </div>
+              <div class="skill-percentage">88%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">MediaPipe</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="85"></div>
+              </div>
+              <div class="skill-percentage">85%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="category-title">
+            <div class="category-icon">🌐</div>
+            Web Development
+          </h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <div class="skill-name">React.js</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="87"></div>
+              </div>
+              <div class="skill-percentage">87%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">Node.js</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="85"></div>
+              </div>
+              <div class="skill-percentage">85%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">Express.js</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="83"></div>
+              </div>
+              <div class="skill-percentage">83%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">FastAPI</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="80"></div>
+              </div>
+              <div class="skill-percentage">80%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="category-title">
+            <div class="category-icon">🗄️</div>
+            Databases & Tools
+          </h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <div class="skill-name">MongoDB</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="85"></div>
+              </div>
+              <div class="skill-percentage">85%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">MySQL</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="80"></div>
+              </div>
+              <div class="skill-percentage">80%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">Docker</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="75"></div>
+              </div>
+              <div class="skill-percentage">75%</div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-name">Git & GitHub</div>
+              <div class="skill-progress">
+                <div class="skill-bar" data-width="90"></div>
+              </div>
+              <div class="skill-percentage">90%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT & ACHIEVEMENTS BOTTOM SECTION -->
+      <div class="bottom-section">
+        <!-- CONTACT SECTION -->
+        <div class="contact-card">
+          <h3 class="contact-title">Let's Connect</h3>
+
+          <a href="mailto:hariprasadkurra84@gmail.com" class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-info">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">hariprasadkurra84@gmail.com</div>
+            </div>
+          </a>
+
+          <a href="tel:+918143270395" class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div class="contact-info">
+              <div class="contact-label">Phone</div>
+              <div class="contact-value">+91 8143270395</div>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/hari-kurra/" target="_blank" class="contact-item">
+            <div class="contact-icon">💼</div>
+            <div class="contact-info">
+              <div class="contact-label">LinkedIn</div>
+              <div class="contact-value">hari-kurra</div>
+            </div>
+          </a>
+
+          <a href="https://github.com/Hariprasadkurra" target="_blank" class="contact-item">
+            <div class="contact-icon">🐙</div>
+            <div class="contact-info">
+              <div class="contact-label">GitHub</div>
+              <div class="contact-value">Hariprasadkurra</div>
+            </div>
+          </a>
+
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-info">
+              <div class="contact-label">Location</div>
+              <div class="contact-value">Bhimavaram, India</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACHIEVEMENTS MINI -->
+        <div class="achievements-mini">
+          <h3>🏆 Key Highlights</h3>
+          <div class="achievement-item">
+            <div class="achievement-name">Smart India Hackathon Finalist</div>
+            <div class="achievement-org">Government of India</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-name">GDG Hackathon Team Lead</div>
+            <div class="achievement-org">Google Developer Groups</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-name">React Development Certified</div>
+            <div class="achievement-org">Cuvette</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-name">ML Python Certification</div>
+            <div class="achievement-org">Udemy</div>
+          </div>
+          <div class="achievement-item">
+            <div class="achievement-name">AI Workshop Graduate</div>
+            <div class="achievement-org">Nextwave</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FULL WIDTH ACHIEVEMENTS SECTION -->
+      <div class="achievements-section">
+        <h2 class="section-title">🎯 Detailed Achievements</h2>
+        <div class="achievements-grid">
+          <div class="achievement-card">
+            <div class="achievement-title">React Web Development Certification</div>
+            <div class="achievement-org">Cuvette</div>
+            <div class="achievement-desc">Comprehensive certification in modern React.js development, covering component architecture, state management, and best practices.</div>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-title">Machine Learning: Hands-On Python</div>
+            <div class="achievement-org">Udemy</div>
+            <div class="achievement-desc">Practical machine learning certification with hands-on implementation using Python, scikit-learn, and data analysis techniques.</div>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-title">Generative AI Model Workshop</div>
+            <div class="achievement-org">Nextwave</div>
+            <div class="achievement-desc">Intensive workshop on generative AI models with hands-on project building and deployment experience.</div>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-title">Smart India Hackathon Finalist</div>
+            <div class="achievement-org">Government of India</div>
+            <div class="achievement-desc">National-level recognition for AI-based traffic management system using Unity and YOLO object detection.</div>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-title">GDG Hackathon Team Lead</div>
+            <div class="achievement-org">Google Developer Groups</div>
+            <div class="achievement-desc">Led team in developing face recognition-based voting platform with real-time authentication and secure processing.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <h2>Connect with Me</h2>
+      <div class="footer-socials">
+        <a href="https://github.com/Hariprasadkurra" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/hari-kurra/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:hariprasadkurra84@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+      <p class="footer-copy">© 2025 Kurra Hari Lakshmi Prasad. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.width = Math.random() * 4 + 2 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Loading animation
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loadingOverlay').classList.add('hidden');
+        
+        // Start main animations
+        initializeAnimations();
+      }, 1000);
+    });
+
+    function initializeAnimations() {
+      // Page header animations
+      anime({
+        targets: '.page-title',
+        opacity: [0, 1],
+        translateY: [-50, 0],
+        duration: 1000,
+        easing: 'easeOutQuart'
+      });
+
+      anime({
+        targets: '.page-subtitle',
+        opacity: [0, 1],
+        translateY: [-30, 0],
+        duration: 800,
+        delay: 300,
+        easing: 'easeOutQuart'
+      });
+
+      // Stats animation
+      anime({
+        targets: '.stat-item',
+        opacity: [0, 1],
+        translateY: [30, 0],
+        duration: 600,
+        delay: anime.stagger(100, {start: 400}),
+        easing: 'easeOutQuart'
+      });
+
+      // Skill categories animation
+      anime({
+        targets: '.skill-category',
+        opacity: [0, 1],
+        translateY: [40, 0],
+        duration: 800,
+        delay: anime.stagger(100, {start: 600}),
+        easing: 'easeOutQuart'
+      });
+
+      // Bottom section animation
+      anime({
+        targets: '.bottom-section > *',
+        opacity: [0, 1],
+        translateY: [30, 0],
+        duration: 600,
+        delay: anime.stagger(200, {start: 800}),
+        easing: 'easeOutQuart'
+      });
+
+      // Achievements animation
+      anime({
+        targets: '.achievement-card',
+        opacity: [0, 1],
+        translateY: [30, 0],
+        duration: 600,
+        delay: anime.stagger(100, {start: 1200}),
+        easing: 'easeOutQuart'
+      });
+    }
+
+    // Enhanced skill progress bars animation
+    const skillsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const skillBars = entry.target.querySelectorAll('.skill-bar');
+          skillBars.forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            setTimeout(() => {
+              bar.style.width = width + '%';
+            }, 300);
+          });
+        }
+      });
+    });
+
+    document.querySelectorAll('.skill-category').forEach(category => {
+      skillsObserver.observe(category);
+    });
+
+    // Skill item hover effects
+    document.querySelectorAll('.skill-item').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        anime({
+          targets: item,
+          scale: 1.05,
+          duration: 200,
+          easing: 'easeOutQuart'
+        });
+      });
+
+      item.addEventListener('mouseleave', () => {
+        anime({
+          targets: item,
+          scale: 1,
+          duration: 200,
+          easing: 'easeOutQuart'
+        });
+      });
+    });
+
+    // Parallax effect for background elements
+    window.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      
+      document.querySelector('.background-gradient').style.transform = 
+        `translate(${x * 20}px, ${y * 20}px)`;
+      
+      document.querySelector('.grid-overlay').style.transform = 
+        `translate(${x * -10}px, ${y * -10}px)`;
+    });
+
+    // Initialize particles
+    createParticles();
+  </script>
+</body>
+</html>
